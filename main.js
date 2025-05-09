@@ -4,76 +4,94 @@ function sendwhatsapp(){
     window.open(message, '_blank').focus();
 }
 
+const menu = document.getElementById("menu");
+const action = document.getElementById("action");
+const lang = document.getElementById("lang");
+
+menu.addEventListener("click", ()=>{
+    handleMenu();
+})
+action.addEventListener("click", ()=>{
+    handleMenu();
+})
+lang.addEventListener("click", ()=>{
+    handleMenu();
+})
+
+function handleMenu(){
+    menu.classList.toggle("is-active");
+    action.classList.toggle("is-active");
+}
+
 
 
 let scroll = document.querySelector(".up");
 window.onscroll = function () {
-    (this.scrollY >= 100) ? scroll.classList.add("show") : scroll.classList.remove("show");
+    (this.scrollY >= 70) ? scroll.classList.add("show") : scroll.classList.remove("show");
 }
 
 
-// Translation
 const translation = {
-    en:{
-        nav_li1: "Home",
-        nav_li2: "About Me",
-        nav_li3: "Services",
-        nav_li4: "Records",
-        nav_li5: "Contact Me",
-        st: "MusicDream",
+    en: {
+        about1: "About Us",
+        services1: "Courses",
+        skills1: "Record With Us",
+        studio: "MusicDream",
         since: "Since 2020.",
-        title: "Music Is Our Dream."
+        title: "Where Every Dream Becomes a Melody.",
+        followus: "Follow Us..",
+        aboutTitle: "About Us",
+        recordingStudio: "Recording Studio",
+        aboutText: `
+            - Music Dream Records is a creative recording studio founded in 2020. <br>
+            - Our passion is to transform dreams into music that inspires and connects people. <br>
+            - We offer professional recording, mixing, mastering services, and educational courses for aspiring artists. <br>
+            - At Music Dream, we believe that every voice deserves to be heard and every dream deserves a chance to shine. 
+        `,
+        
     },
-    ar:{
-        nav_li1: "الرئيسية",
-        nav_li2: "نبذه عني",
-        nav_li3: "الخدمات",
-        nav_li4: "تسجيلات",
-        nav_li5: "تواصل معي",
-        st: "استوديو الاحلام",
-        since: ".منذ 2020",
-        title: ".الموسيقى هي حلمنا"
+    ar: {
+        about1: "نبذة عنا",
+        services1: "الدورات",
+        skills1: "سجّل معنا",
+        studio: "استوديو الحلم",
+        since: "منذ 2020",
+        title: "حيث يتحول كل حلم إلى لحن",
+        followus: "تابعنا..",
+        aboutTitle: "من نحن",
+        recordingStudio: "استوديو التسجيل",
+        aboutText: `
+            - "ميوزك دريم ريكوردز" هو استوديو تسجيل إبداعي تأسس عام 2020. <br>
+            - شغفنا هو تحويل الأحلام إلى موسيقى تلهم وتربط بين الناس. <br>
+            - نقدم خدمات التسجيل والميكساج والماسترينج الاحترافية، ودورات تعليمية للفنانين الطموحين. <br>
+            - في "ميوزك دريم"، نؤمن أن كل صوت يستحق أن يُسمع، وكل حلم يستحق فرصة للتألق.
+        `,
+        
     }
-}
+};
 
-const langSelectop = document.querySelector("select");
-let nav1 = document.getElementById("home");
-let nav2 = document.getElementById("about1");
-let nav3 = document.getElementById("services1");
-let nav4 = document.getElementById("skills1");
-let nav5 = document.getElementById("contact1");
-let stT = document.getElementById("studio");
-let sinceT = document.getElementById("since");
-let titleT = document.getElementById("title");
-let rev = document.querySelector(".content");
-let revtxt = document.querySelector(".container-text");
+const langSelectop = document.getElementById("lang");
+const rev = document.querySelector(".content");
+const revtxt = document.querySelector(".container-text");
 
 langSelectop.addEventListener("change", (event) => {
-    setLanguage(event.target.value)
-})
-
+    setLanguage(event.target.value);
+});
 
 const setLanguage = (language) => {
-    if (language == "ar"){
-        // nav1.innerText = translation.ar.nav_li1;
-        nav2.innerText = translation.ar.nav_li2;
-        nav3.innerText = translation.ar.nav_li3;
-        nav4.innerText = translation.ar.nav_li4;
-        nav5.innerText = translation.ar.nav_li5;
-        stT.innerText = translation.ar.st;
-        sinceT.innerText = translation.ar.since;
-        titleT.innerText = translation.ar.title;
+    const trans = translation[language];
+
+    for (const key in trans) {
+        let element = document.getElementById(key);
+        if (element) {
+            element.innerText = trans[key];
+        }
+    }
+
+    if (language === "ar") {
         rev.classList.add("ar");
         revtxt.classList.add("revtxt");
-    }else if (language == "en"){
-        // nav1.innerText = translation.en.nav_li1;
-        nav2.innerText = translation.en.nav_li2;
-        nav3.innerText = translation.en.nav_li3;
-        nav4.innerText = translation.en.nav_li4;
-        nav5.innerText = translation.en.nav_li5;
-        stT.innerText = translation.en.st;
-        sinceT.innerText = translation.en.since;
-        titleT.innerText = translation.en.title;
+    } else {
         rev.classList.remove("ar");
         revtxt.classList.remove("revtxt");
     }
